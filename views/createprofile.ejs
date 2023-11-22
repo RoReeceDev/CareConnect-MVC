@@ -1,0 +1,52 @@
+<%- include('partials/userheader') -%>
+
+    <main class="container">
+        <div id="fh5co-portfolio">
+            <div class="container">
+                <div class="row animate-box">
+                    <div class="col-sm-7 col-md-offset-2 text-center fh5co-heading">
+                        <h2>Create Profile</h2>
+                        <p>Set up your profile!</p>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-sm-push-1 animate-box">
+                    <div class="row">
+                        <p><%= user.id %></p>
+                        <form action="/createprofile/<%= user.id %>?_method=PUT"  method="POST">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Name/Facility Name" name="userName">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Location"
+                                        name="userLocation">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" placeholder="Date of Birth"
+                                        name="userDOB">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea name="userBio" class="form-control" id="" cols="30" rows="7"
+                                        placeholder="Add a short bio about yourself or your facility"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <%- include('partials/footer') -%>

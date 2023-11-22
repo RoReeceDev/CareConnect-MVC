@@ -11,7 +11,9 @@ const UserSchema = new mongoose.Schema({
     isAdmin: {type: Boolean, default: false},
   },
   profile: { 
+    profileName: {type: String, default: 'empty'},
     profilePhoto: {type: String, default: 'empty'},
+    cloudinaryId: { type: String, default: 'empty'},
     dateOfBirth: {type: String, default: 'empty' },
     bio: {type: String, default: 'empty'},
     location: {type: String, default: 'empty'},

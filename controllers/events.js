@@ -1,12 +1,19 @@
-
+const mongoose = require("mongoose");
 const Event = require("../models/Event");
-const Comment = require("../models/Comment");
+const User = require("../models/User");
+
+
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
         console.log(req.user.id)
-      const events = await Event.find({ user: req.user.id });
+      let events = []
+      if(req.user.role.isVolunteer === false){
+       events = await Event.find({ user: req.user.id });
+      }else{
+       events = await Event.find({ volunteers: req.user.id })
+      }
       console.log(events)
       res.render("profile.ejs", { events: events, user: req.user });
     } catch (err) {
@@ -24,7 +31,9 @@ module.exports = {
   getEvent: async (req, res) => {
     try {
       const event = await Event.findById(req.params.id);
-      res.render("post.ejs", { event: event, user: req.user});
+      const volunteers = await User.find({ '_id': { $in: event.volunteers.map(id => mongoose.Types.ObjectId(id)) } })
+      console.log("volunteers", volunteers);
+      res.render("event.ejs", { event: event, user: req.user, volunteers: volunteers});
     } catch (err) {
       console.log(err);
     }

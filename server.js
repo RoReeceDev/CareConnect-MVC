@@ -12,6 +12,7 @@ const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 const eventRoutes = require("./routes/events");
+const NHRoutes = require("./routes/nursinghomes");
 
 
 //Use .env file in config folder
@@ -61,6 +62,8 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 app.use("/event", eventRoutes);
+app.use("/nh", NHRoutes);
+
 
 
 

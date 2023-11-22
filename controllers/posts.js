@@ -1,5 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Post = require("../models/Post");
+const User = require("../models/User");
 const Comment = require("../models/Comment");
 
 module.exports = {
@@ -13,8 +15,9 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const users = await User.find().lean();
+      console.log(users)
+      res.render("feed.ejs", { users: users });
     } catch (err) {
       console.log(err);
     }
