@@ -1,36 +1,40 @@
 <%- include('partials/userheader') -%>
 
-<main class="container">
+  <main class="container">
 
     <div class="">
-    <ul class="events">
-     
+      <ul class="events">
+
         <% for(var i=0; i<events.length; i++) {%>
           <li class="event">
             <div>
-            <p><%= events[i].name %></p>
-            <p><%= events[i].numNeeded %></p>
-            <% if ((events[i].numNeeded > 0) && (user.role.isNursingHome===false)) { %>
-            <form  action="/nh/joinEvent/<%= events[i].id %>?_method=PUT"
-                method="POST">
-                <button>Sign up for Event</button>
-            </form>
-            <% } %>
-            <form  action="/nh/unjoinEvent/<%= events[i].id %>?_method=PUT"
-              method="POST">
-              <button>Cancel sign up</button>
-          </form>
-            <div>
+              <p>
+                <%= events[i].name %>
+              </p>
+              <p>
+                <%= events[i].numNeeded %>
+              </p>
+              <% if ((events[i].numNeeded> 0) && (user.role.isNursingHome===false)) { %>
+                <form action="/nh/joinEvent/<%= events[i].id %>?_method=PUT" method="POST">
+                  <button>Sign up for Event</button>
+                </form>
+                <% } %>
+                  <% if (user.role.isNursingHome===false) { %>
+                    <form action="/nh/unjoinEvent/<%= events[i].id %>?_method=PUT" method="POST">
+                      <button>Cancel sign up</button>
+                    </form>
+                    <% } %>
+            </div>
           </li>
           <% } %>
-    
+
 
 
       </ul>
     </div>
 
-    
-</main>
-    
 
-<%- include('partials/footer') -%>
+  </main>
+
+
+  <%- include('partials/footer') -%>
