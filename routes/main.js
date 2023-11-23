@@ -12,11 +12,13 @@ router.get("/", homeController.getIndex);
 router.get("/profile", ensureAuth, eventsController.getProfile);
 router.get("/createprofile", ensureAuth, createProfileController.getCreateProfile);
 router.put("/createprofile/:id", createProfileController.updateProfile);
-router.get("/feed", ensureAuth, postsController.getFeed);
+router.get("/board", ensureAuth, postsController.getBoard);
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
+router.delete("/delete-account/:id", authController.deleteAccount);
+
 
 module.exports = router;

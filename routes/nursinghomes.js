@@ -10,6 +10,8 @@ router.get("/:id", ensureAuth, NHController.getNH);
 // router.post("/createEvent",  eventsController.createEvent);
 
 router.put("/joinEvent/:id", NHController.joinEvent);
+router.put("/unjoinEvent/:id", NHController.unjoinEvent);
+
 
 // router.delete("/deleteEvent/:id", eventsController.deleteEvent);
 

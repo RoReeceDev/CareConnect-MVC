@@ -1,9 +1,10 @@
 <%- include('partials/userheader') -%>
 
 <main class="container">
-    <div>
+
+    <div class="">
     <ul class="events">
-         
+     
         <% for(var i=0; i<events.length; i++) {%>
           <li class="event">
             <div>
@@ -12,16 +13,23 @@
             <% if ((events[i].numNeeded > 0) && (user.role.isNursingHome===false)) { %>
             <form  action="/nh/joinEvent/<%= events[i].id %>?_method=PUT"
                 method="POST">
-                <button>Volunteer For Event</button>
+                <button>Sign up for Event</button>
             </form>
+            <% } %>
+            <form  action="/nh/unjoinEvent/<%= events[i].id %>?_method=PUT"
+              method="POST">
+              <button>Cancel sign up</button>
+          </form>
             <div>
           </li>
           <% } %>
-          <% } %>
+    
 
 
       </ul>
     </div>
+
+    
 </main>
     
 

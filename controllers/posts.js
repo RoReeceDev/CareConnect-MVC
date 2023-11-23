@@ -12,11 +12,10 @@ module.exports = {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
+  getBoard: async (req, res) => {
     try {
       const users = await User.find().lean();
-      console.log(users)
-      res.render("feed.ejs", { users: users });
+      res.render("board.ejs", { users: users });
     } catch (err) {
       console.log(err);
     }

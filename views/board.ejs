@@ -1,0 +1,50 @@
+<%- include('partials/userheader') -%>
+  <div class="container">
+
+
+    <h1>Find A Home To Help</h1>
+    <div class="row justify-content-center mt-5">
+      <section class="row list-unstyled">
+        <div class="card-holder">
+          <% for(var i=0; i<users.length; i++) {%>
+            <%# need to make this more bulletproof, if user.role undefine, then continue? %>
+              <% if (users[i].role.isNursingHome===true) { %>
+                <div class="home-card">
+                <a href="/nh/<%=users[i]._id %>">
+                  <div>
+                    <img src="/imgs/nursinghome.jpg">
+                  </div>
+                  <div >
+                    <p>
+                      <span>Nursing Home:</span>
+                      <%= users[i].profile.profileName%>
+                    </p>
+                    <p>
+                      <span>Contact Name:</span>
+                      <%= users[i].profile.contactName%>
+                    </p>
+                    <p>
+                      <span>Nursing Home Phone:</span>
+                      <%= users[i].profile.contactNumber%>
+                    </p>
+                    <p>
+                      <span></span>
+                      <%= users[i].profile.bio%>
+                    </p>
+                    <p>
+                      <span>Located:</span>
+                      <%= users[i].profile.cityState%>
+                        <%= users[i].profile.zipcode%>
+                    </p>
+  
+                  </div>
+                </a>
+                </div>
+
+                <% } %>
+                  <% } %>
+        </div>
+      </section>
+    </div>
+  </div>
+  <%- include('partials/footer') -%>

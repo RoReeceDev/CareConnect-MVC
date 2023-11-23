@@ -1,6 +1,8 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const Event = require("../models/Event");
+
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -68,19 +70,61 @@ exports.getSignup = (req, res) => {
 };
 
 exports.updateProfile = async (req, res) => {
-      try {
-        await User.findOneAndUpdate(
-          { _id: req.params.id },
-          {
-            $set: { likes: 1 },
-          }
-        );
-        console.log("Likes +1");
-        res.redirect(`/profile/${req.params.id}`);
-      } catch (err) {
-        console.log(err);
+  try {
+    await User.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: { likes: 1 },
       }
+    );
+    console.log("Likes +1");
+    res.redirect(`/profile/${req.params.id}`);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+exports.deleteAccount = async (req, res) => {
+  try {
+
+    if(req.user.role.isNursingHome === true){
+    await Event.deleteMany({ user: req.user.id });
     }
+
+    if(req.user.role.isVolunteer === true){
+
+    // Fetch events the user has signed up for
+    const events = await Event.find({ volunteers: req.user._id });
+    
+    // Update numNeeded for each event
+    for (const event of events) {
+      await Event.findByIdAndUpdate(
+        event._id,
+        { $inc: { numNeeded: 1 }, $pull: { volunteers: req.user._id } },
+        { new: true }
+      );
+    }
+  }
+
+    // Delete the user account
+    await User.findByIdAndDelete(req.user._id);
+
+    req.logout(() => {
+      console.log("User has logged out.");
+    });
+    req.session.destroy((err) => {
+      if (err) {
+        console.log("Error: Failed to destroy the session during logout.", err);
+      }
+      req.user = null;
+      res.redirect("/");
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
@@ -101,9 +145,9 @@ exports.postSignup = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  if(req.body.userRole === 'volunteer'){
+  if (req.body.userRole === 'volunteer') {
     console.log('Volunteer')
-  } else{
+  } else {
     console.log('Nursing Home')
   }
 

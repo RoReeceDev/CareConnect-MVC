@@ -7,23 +7,21 @@ const User = require("../models/User");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-        console.log(req.user.id)
       let events = []
       if(req.user.role.isVolunteer === false){
-       events = await Event.find({ user: req.user.id });
+       events = await Event.find({ user: req.user.id }).sort({createdAt: "desc"});
       }else{
-       events = await Event.find({ volunteers: req.user.id })
+       events = await Event.find({ volunteers: req.user.id }).sort({eventDate: "ascending"});
       }
-      console.log(events)
       res.render("profile.ejs", { events: events, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
+  getBoard: async (req, res) => {
     try {
       const events = await Event.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { events: events });
+      res.render("board.ejs", { events: events });
     } catch (err) {
       console.log(err);
     }
@@ -32,7 +30,6 @@ module.exports = {
     try {
       const event = await Event.findById(req.params.id);
       const volunteers = await User.find({ '_id': { $in: event.volunteers.map(id => mongoose.Types.ObjectId(id)) } })
-      console.log("volunteers", volunteers);
       res.render("event.ejs", { event: event, user: req.user, volunteers: volunteers});
     } catch (err) {
       console.log(err);
