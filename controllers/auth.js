@@ -93,18 +93,24 @@ exports.deleteAccount = async (req, res) => {
     }
 
     if(req.user.role.isVolunteer === true){
-
+    let events = []
     // Fetch events the user has signed up for
-    const events = await Event.find({ volunteers: req.user._id });
+    events = await Event.find({ volunteers: req.user.id  });
+    console.log(req.user.id )
+
+    console.log(events)
     
     // Update numNeeded for each event
     for (const event of events) {
       await Event.findByIdAndUpdate(
         event._id,
-        { $inc: { numNeeded: 1 }, $pull: { volunteers: req.user._id } },
+        { $inc: { numNeeded: + 1 }, $pull: { volunteers: req.user._id } },
         { new: true }
       );
+      console.log('Events Nums Updated before User Deletion')
+      console.log(events)
     }
+    console.log('Events Updated before User Deletion')
   }
 
     // Delete the user account

@@ -8,6 +8,17 @@
         <% for(var i=0; i<events.length; i++) {%>
           <li class="event">
             <div>
+              <% if (messages && messages.success) { %>
+                <div class="success-message">
+                  <%= messages.success.msg %>
+                </div>
+              <% } %>
+              
+              <% if (messages && messages.info) { %>
+                <div class="info-message">
+                  <%= messages.info.msg %>
+                </div>
+              <% } %>
               <p>
                 <%= events[i].name %>
               </p>
@@ -15,12 +26,12 @@
                 <%= events[i].numNeeded %>
               </p>
               <% if ((events[i].numNeeded> 0) && (user.role.isNursingHome===false)) { %>
-                <form action="/nh/joinEvent/<%= events[i].id %>?_method=PUT" method="POST">
+                <form action="/nh/joinEvent/<%= events[i]._id %>?_method=PUT" method="POST">
                   <button>Sign up for Event</button>
                 </form>
                 <% } %>
                   <% if (user.role.isNursingHome===false) { %>
-                    <form action="/nh/unjoinEvent/<%= events[i].id %>?_method=PUT" method="POST">
+                    <form action="/nh/unjoinEvent/<%= events[i]._id %>?_method=PUT" method="POST">
                       <button>Cancel sign up</button>
                     </form>
                     <% } %>

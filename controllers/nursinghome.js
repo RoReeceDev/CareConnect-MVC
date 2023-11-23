@@ -32,10 +32,10 @@ module.exports = {
           ).lean();
 
           console.log("Volunteer -1");
-          req.flash('success', 'You have successfully signed up for the event!');
+          req.flash('success',{ msg: 'You have successfully signed up for the event!'});
         } else {
           console.log("User has already signed up for this event");
-          req.flash('info', 'You have already signed up for this event.');
+          req.flash('info', { msg:'You have already signed up for this event.'});
 
         }
         console.log(req.flash());
@@ -48,9 +48,10 @@ module.exports = {
   },
   unjoinEvent: async (req, res) => {
     try {
-      // Check if numNeeded for volunteers is more than 0
+
       const events = await Event.find({ _id: req.params.id });
 
+      // Check if numNeeded for volunteers is more than 0
       if (events[0].numNeeded >= 0) {
         // Check if the user is already in the volunteers array
         const isUserAlreadyVolunteer = events[0].volunteers.includes(req.user.id);
@@ -64,11 +65,11 @@ module.exports = {
             }
           ).lean();
 
-          console.log("Volunteer -1");
-          req.flash('success', 'You have successfully signed up for the event!');
+          console.log("Volunteer +1");
+          req.flash('success', { msg:'You have successfully cancelled your sign up for the event!'});
         } else {
-          console.log("User has already signed up for this event");
-          req.flash('info', 'You have already signed up for this event.');
+          console.log("User has cancelled sign up for this event");
+          req.flash('info', { msg:'You have already cancelled sign up for this event or you were never signed up for this event.'});
 
         }
         console.log(req.flash());
