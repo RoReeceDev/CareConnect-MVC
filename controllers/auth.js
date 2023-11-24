@@ -3,6 +3,7 @@ const validator = require("validator");
 const User = require("../models/User");
 const Event = require("../models/Event");
 
+//CRUD- get login page
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -12,6 +13,9 @@ exports.getLogin = (req, res) => {
     title: "Login",
   });
 };
+
+
+//User login
 
 
 exports.postLogin = (req, res, next) => {
@@ -48,6 +52,8 @@ exports.postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
+//CRUD- get logout
+
 exports.logout = (req, res) => {
   req.logout(() => {
     console.log('User has logged out.')
@@ -60,6 +66,8 @@ exports.logout = (req, res) => {
   });
 };
 
+//CRUD- get sign up page 
+
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
@@ -69,49 +77,44 @@ exports.getSignup = (req, res) => {
   });
 };
 
-exports.updateProfile = async (req, res) => {
-  try {
-    await User.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: { likes: 1 },
-      }
-    );
-    console.log("Likes +1");
-    res.redirect(`/profile/${req.params.id}`);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
+//CRUD-Delete Account
 
 exports.deleteAccount = async (req, res) => {
   try {
 
-    if(req.user.role.isNursingHome === true){
-    await Event.deleteMany({ user: req.user.id });
+    // Validate that the user trying to delete the account is the logged-in user
+    if (req.body.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Unauthorized: You do not have permission to delete this account." });
     }
 
-    if(req.user.role.isVolunteer === true){
-    let events = []
-    // Fetch events the user has signed up for
-    events = await Event.find({ volunteers: req.user.id  });
-    console.log(req.user.id )
+    //if user is a nursing home account delete all events created by them
 
-    console.log(events)
-    
-    // Update numNeeded for each event
-    for (const event of events) {
-      await Event.findByIdAndUpdate(
-        event._id,
-        { $inc: { numNeeded: + 1 }, $pull: { volunteers: req.user._id } },
-        { new: true }
-      );
-      console.log('Events Nums Updated before User Deletion')
+    if (req.user.role.isNursingHome === true) {
+      await Event.deleteMany({ user: req.user.id });
+    }
+
+    //if user is a volunteers, delete them from all events they signed up for an update the events numsNeeded
+
+    if (req.user.role.isVolunteer === true) {
+      let events = []
+      // Fetch events the user has signed up for
+      events = await Event.find({ volunteers: req.user.id });
+      console.log(req.user.id)
+
       console.log(events)
+
+      // Update numNeeded for each event
+      for (const event of events) {
+        await Event.findByIdAndUpdate(
+          event._id,
+          { $inc: { numNeeded: + 1 }, $pull: { volunteers: req.user._id } },
+          { new: true }
+        );
+        console.log('Events Nums Updated before User Deletion')
+        console.log(events)
+      }
+      console.log('Events Updated before User Deletion')
     }
-    console.log('Events Updated before User Deletion')
-  }
 
     // Delete the user account
     await User.findByIdAndDelete(req.user._id);
@@ -157,6 +160,8 @@ exports.postSignup = (req, res, next) => {
     console.log('Nursing Home')
   }
 
+  //check if user signed up as volunteer or nursing home
+
   let isVolunteer = (req.body.userRole === 'volunteer') ? true : false
 
   const user = new User({
@@ -168,6 +173,8 @@ exports.postSignup = (req, res, next) => {
       isNursingHome: !isVolunteer,
     }
   });
+
+  //Check to make sure there are no users with the same email or same username
 
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
