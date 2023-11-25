@@ -7,7 +7,7 @@ module.exports = {
   getNH: async (req, res) => {
     try {
       const events = await Event.find({ user: req.params.id });
-      res.render("nursinghome.ejs", { events: events, user: req.user, messages: req.flash() });
+      res.render("nursinghome.ejs", { events: events, user: req.user, messages: req.flash(), pageName: 'nursinghome'});
     } catch (err) {
       console.log(err);
     }
@@ -32,10 +32,10 @@ module.exports = {
           ).lean();
 
           console.log("Volunteer -1");
-          req.flash('success',{ msg: 'You have successfully signed up for the event!'});
+          req.flash('success', 'You have successfully signed up for the event!');
         } else {
           console.log("User has already signed up for this event");
-          req.flash('info', { msg:'You have already signed up for this event.'});
+          req.flash('info', 'You have already signed up for this event.');
 
         }
         console.log(req.flash());
@@ -66,10 +66,10 @@ module.exports = {
           ).lean();
 
           console.log("Volunteer +1");
-          req.flash('success', { msg:'You have successfully cancelled your sign up for the event!'});
+          req.flash('success', 'You have successfully cancelled your sign up for the event!');
         } else {
           console.log("User has cancelled sign up for this event");
-          req.flash('info', { msg:'You have already cancelled sign up for this event or you were never signed up for this event.'});
+          req.flash('info','You have already cancelled sign up for this event or you were never signed up for this event.');
 
         }
         console.log(req.flash());

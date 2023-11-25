@@ -1,5 +1,22 @@
+//Edit Profile Btn
 
+// var editbtn = document.querySelector(".editbtn")
 
+// editbtn.addEventListener('click', function(){
+// 	const editDiv = document.querySelector(".editing")
+// 	editDiv.classList.toggle('tagon')
+// 	editDiv.classList.toggle('hidden')
+// })
+
+var editbtn = document.getElementsByClassName("editbtn")
+
+Array.from(editbtn).forEach(function(element) {
+	element.addEventListener('click', function(){
+		const editDiv = document.querySelector(".editing")
+		editDiv.classList.toggle('editon')
+		editDiv.classList.toggle('hidden')
+	})
+})
 
 ;(function () {
 	

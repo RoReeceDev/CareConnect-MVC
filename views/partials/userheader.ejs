@@ -78,12 +78,12 @@
                         </div>
                         <div class="col-xs-9 text-right menu-1">
                             <ul>
-                                <li class="active"><a href="/">Home</a></li>
-                                <li class="has-dropdown">
+                                <li class="<%= pageName=='index' ? 'active': '' %>"><a href="/">Home</a></li>
+                                <li>
                                     <a href="/board">Volunteer Board</a>
                                 </li>
-                                <li><a href="/profile">Profile</a></li>
-                                <li><a href="/contact">Contact</a></li>
+                                <li class="<%= pageName=='myevents' ? 'active': '' %>"><a href="/myevents">My Events</a></li>
+                                <li><a href="/profile">My Profile</a></li>
                             </ul>
                         </div>
 

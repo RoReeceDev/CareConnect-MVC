@@ -1,30 +1,39 @@
 <%- include('partials/userheader') -%>
 
   <main class="container">
+    <div></div>
 
     <div class="">
       <ul class="events">
-
         <% for(var i=0; i<events.length; i++) {%>
           <li class="event">
             <div>
               <% if (messages && messages.success) { %>
                 <div class="success-message">
-                  <%= messages.success.msg %>
+                  <%= messages.success[0] %>
                 </div>
               <% } %>
               
               <% if (messages && messages.info) { %>
                 <div class="info-message">
-                  <%= messages.info.msg %>
+                  <%= messages.info[0] %>
                 </div>
               <% } %>
+              <div>
               <p>
-                <%= events[i].name %>
+                <span>Volunteer Event Name:</span><%= events[i].name %>
               </p>
               <p>
-                <%= events[i].numNeeded %>
+                <span>Date of Event:</span><%= events[i].eventDate %>
               </p>
+              <p>
+                <span>Starts:</span><%= events[i].startTime %>
+                <span>Ends:</span><%= events[i].endTime %>
+              </p>
+              <p>
+                <span>Volunteers Needed:</span><%= events[i].numNeeded %>
+              </p>
+              </div>
               <% if ((events[i].numNeeded> 0) && (user.role.isNursingHome===false)) { %>
                 <form action="/nh/joinEvent/<%= events[i]._id %>?_method=PUT" method="POST">
                   <button>Sign up for Event</button>

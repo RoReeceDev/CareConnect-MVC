@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   },
   profile: { 
     profileName: {type: String, default: ''},
-    userAge: {type: Number, default: 0},
+    userAge: {type: Number},
     contactName: {type: String, default: ''},
     contactNumber: {type: String, default: ''},
     profilePhoto: {type: String, default: ''},

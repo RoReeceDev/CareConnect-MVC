@@ -89,6 +89,37 @@ input[type=radio] {
   column-gap: 15px;
 }
 
+.profile-cont{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-info{
+
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  flex-direction: column;
+  background-color: rgb(254, 232, 86);
+  box-shadow: 0px 14px 30px -15px rgba(0, 0, 0, 0.75)
+}
+
+.profile-btns{
+  display: flex;
+}
+
+.profile-head{
+  display: flex;
+  flex-direction: column;
+align-items: center;
+margin: 15px 0%;
+}
 /* =======================================================
 *
 * 	Template Style 

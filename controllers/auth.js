@@ -10,7 +10,7 @@ exports.getLogin = (req, res) => {
     return res.redirect("/profile");
   }
   res.render("login", {
-    title: "Login",
+    title: "Login", pageName: 'login'
   });
 };
 
@@ -73,7 +73,7 @@ exports.getSignup = (req, res) => {
     return res.redirect("/profile");
   }
   res.render("signup", {
-    title: "Create Account",
+    title: "Create Account", pageName: 'signup'
   });
 };
 
@@ -82,10 +82,6 @@ exports.getSignup = (req, res) => {
 exports.deleteAccount = async (req, res) => {
   try {
 
-    // Validate that the user trying to delete the account is the logged-in user
-    if (req.body.userId !== req.user._id.toString()) {
-      return res.status(403).json({ error: "Unauthorized: You do not have permission to delete this account." });
-    }
 
     //if user is a nursing home account delete all events created by them
 
@@ -110,14 +106,15 @@ exports.deleteAccount = async (req, res) => {
           { $inc: { numNeeded: + 1 }, $pull: { volunteers: req.user._id } },
           { new: true }
         );
-        console.log('Events Nums Updated before User Deletion')
-        console.log(events)
+        const updatedEvents = await Event.find({ volunteers: req.user.id });
+        console.log('Updated Events after User Deletion', updatedEvents);
       }
       console.log('Events Updated before User Deletion')
     }
 
     // Delete the user account
     await User.findByIdAndDelete(req.user._id);
+
 
     req.logout(() => {
       console.log("User has logged out.");
@@ -127,6 +124,7 @@ exports.deleteAccount = async (req, res) => {
         console.log("Error: Failed to destroy the session during logout.", err);
       }
       req.user = null;
+
       res.redirect("/");
     });
   } catch (err) {

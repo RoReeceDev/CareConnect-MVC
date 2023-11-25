@@ -9,10 +9,10 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 const eventRoutes = require("./routes/events");
 const NHRoutes = require("./routes/nursinghomes");
+const editProfileRoutes = require("./routes/editprofile");
 
 
 //Use .env file in config folder
@@ -62,10 +62,11 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 app.use("/event", eventRoutes);
 app.use("/nh", NHRoutes);
+app.use("/editprofile", editProfileRoutes);
+
 
 
 
