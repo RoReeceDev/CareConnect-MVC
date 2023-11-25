@@ -22,7 +22,7 @@ module.exports = {
     try {
       const event = await Event.findById(req.params.id);
       const volunteers = await User.find({ '_id': { $in: event.volunteers.map(id => mongoose.Types.ObjectId(id)) } })
-      res.render("event.ejs", { event: event, user: req.user, volunteers: volunteers});
+      res.render("event.ejs", { event: event, user: req.user, pageName: 'event',volunteers: volunteers});
     } catch (err) {
       console.log(err);
     }

@@ -2,157 +2,199 @@
     <%if(user.role.isNursingHome==true){ %>
 
         <div class="container">
+            <div class="profile-head">
+
+                <h2>Welcome to your profile, <%= user.profile.profileName %>!</h2>
+                <div>
+                    <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+                </div>
+            </div>
 
             <div class="row mt-5 profile-cont">
-                <div class="profile-head">
+                <div class="profile-format">
+                    <div class="profile-left">
+                        <div class="profile-info">
+                            <div class="profile-dbinfo">
+                                <p><strong>User Name</strong>: <%= user.userName %>
+                                </p>
+                                <p><strong>Email</strong>: <%= user.email %>
+                                </p>
+                                <p><strong>Contact</strong>: <%= user.profile.contactName %>
+                                </p>
+                                <p><strong>Facility Number</strong>: <%= user.profile.contactNumber %>
+                                </p>
+                                <p class="profile-bio"><strong>Bio</strong>: <%= user.profile.bio %>
+                                </p>
+                                <div>
+                                    <p><strong>Address</strong>: <span>
+                                            <%= user.profile.address %>
+                                        </span>
+                                        <span>
+                                            <%= user.profile.cityState %>, <%= user.profile.zipcode %>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
 
-                    <h2>Welcome to your profile, <%= user.profile.profileName %>!</h2>
-                    <div>
-                        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+                            <div class="profile-btns">
+                                <form action="/delete-account/<%= user._id %>?_method=DELETE" method="POST"
+                                    class="col-3">
+                                    <button class="btn btn-primary fa fa-trash" type="submit">Delete Account</button>
+                                </form>
+                                <a class="btn btn-primary editbtn">Edit Profile</a>
+                            </div>
+                            <div class="edit-cont">
+                                <div class="editing hidden">
+                                    <h4>Update Your Profile</h4>
+                                    <form action="/editprofile/edit/<%= user._id %>?_method=PUT" method="POST">
+                                        <div class="form-cont">
+                                        <div class="col-md-12">
+                                            <div class="edit-group"  >
+                                                <label class="edit-label" for="editFacilityName">Profile Name:</label>
+                                                <input type="text" class="edit-prof" placeholder="Facility Name"
+                                                    name="editFacilityName" value=" <%= user.profile.profileName %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="edit-group" >
+                                                <label class="edit-label" for="editContactName">Contact Name:</label>
+                                                <input type="text" class="edit-prof" placeholder="Contact Name"
+                                                    name="editContactName" value=" <%= user.profile.contactName %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="edit-group" >
+                                                <label class="edit-label" for="editFacilityPhone">Facility Number:</label>
+                                                <input type="text" class="edit-prof" placeholder="Facility Number"
+                                                    name="editFacilityPhone" value=" <%= user.profile.contactNumber %>">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="edit-group"  >
+                                                <label class="edit-label" for="editFacilityAddress">Address:</label>
+
+                                                <input type="text" class="edit-prof" placeholder="Address"
+                                                    name="editFacilityAddress" value=" <%= user.profile.address %>">
+                                            </div>
+                                            <div class="edit-group" >
+                                                <label class="edit-label" for="editFacilityCityState">City, State:</label>
+
+                                                <input type="text" class="edit-prof" placeholder="City, State"
+                                                    name="editFacilityCityState" value=" <%= user.profile.cityState %>">
+                                            </div>
+                                            <div class="edit-group" >
+                                            <label  class="edit-label" for="editFacilityZipcode">Zipcode:</label>
+
+                                                <input type="text" class="edit-prof" placeholder="Zipcode"
+                                                    name="editFacilityZipcode" value=" <%= user.profile.zipcode %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="editFacilityBio" class="box-label">Bio:</label>
+                                                <textarea name="editFacilityBio" class="tform edit-prof" id="" cols="30"
+                                                    rows="7"
+                                                    placeholder="Add a short bio about your facility"><%= user.profile.bio %></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-primary">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="profile-right">
+                        <div class="row justify-content-center mt-5 profile-info rgt-clr">
+                            <p>Need to Create Some Volunteer Events?</p>
+                            <a class="btn btn-primary" href="/myevents">My Events</a>
+                        </div>
+                        <div class="row justify-content-center mt-5 profile-info rgt-clr">
+                            <p>Check Out Other Homes?</p>
+                            <a class="btn btn-primary" href="/board">Check out Volunteer Board</a>
+                        </div>
                     </div>
                 </div>
-                <div class="profile-info">
-                    <div>
-                        <p><strong>User Name</strong>: <%= user.userName %>
-                        </p>
-                        <p><strong>Email</strong>: <%= user.email %>
-                        </p>
-                        <p><strong>Contact</strong>: <%= user.profile.contactName %>
-                        </p>
-                        <p><strong>Facility Number</strong>: <%= user.profile.contactNumber %>
-                        </p>
-                        <p><strong>Bio</strong>: <%= user.profile.bio %>
-                        </p>
+            </div>
+        </div>
+        <% } %>
+
+            <%if(user.role.isVolunteer==true){ %>
+                <div class="container">
+                    <div class="profile-head">
+
+                        <h2>Welcome to your profile, <%= user.profile.profileName %>!</h2>
                         <div>
-                            <p><strong>Address</strong>: <%= user.profile.address %>
-                            </p>
-                            <p><strong>Address</strong>: <%= user.profile.cityState %>
-                            </p>
-                            <p><strong>Address</strong>: <%= user.profile.zipcode %>
-                            </p>
+                            <a href="/logout" class="col-3 btn btn-primary">Logout</a>
                         </div>
                     </div>
 
-                    <div class="profile-btns">
-                        <form action="/delete-account/<%= user._id %>?_method=DELETE" method="POST" class="col-3">
-                            <button class="btn btn-primary fa fa-trash" type="submit">Delete Account</button>
-                        </form>
-                        <a class="btn btn-primary editbtn">Edit Profile</a>
-                    </div>
-                    <div>
-                        <div class="editing hidden">
-                            <h4>Update Your Profile</h4>
-                            <form action="/editprofile/edit/<%= user._id %>?_method=PUT" method="POST">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Facility Name"
-                                            name="editFacilityName" value=" <%= user.profile.profileName %>">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Contact Name"
-                                            name="editContactName"  value=" <%= user.profile.contactName %>">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Facility Number"
-                                            name="editFacilityPhone"  value=" <%= user.profile.contactNumber %>">
+                    <div class="row mt-5 profile-cont">
+                        <div class="profile-format">
+                            <div class="profile-left">
 
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Address"
-                                            name="editFacilityAddress" value=" <%= user.profile.address %>">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="City, State"
-                                            name="editFacilityCityState" value=" <%= user.profile.cityState %>">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Zipcode"
-                                            name="editFacilityZipcode" value=" <%= user.profile.zipcode %>">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <textarea name="editFacilityBio" class="form-control" id="" cols="30" rows="7"
-                                            placeholder="Add a short bio about your facility"><%= user.profile.bio %></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 text-center">
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary">
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-
-                </div>
-                <% } %>
-
-                    <%if(user.role.isVolunteer==true){ %>
-                        <div class="container">
-
-                            <div class="row mt-5 profile-cont">
-                                <div class="profile-head">
-                
-                                    <h2>Welcome to your profile, <%= user.profile.profileName %>!</h2>
-                                    <div>
-                                        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-                                    </div>
-                                </div>
                                 <div class="profile-info">
-                                    <div>
+                                    <div class="profile-dbinfo">
                                         <p><strong>User Name</strong>: <%= user.userName %>
                                         </p>
                                         <p><strong>Email</strong>: <%= user.email %>
                                         </p>
                                         <p><strong>Age</strong>: <%= user.profile.userAge %>
                                         </p>
-                                        <p><strong>Bio</strong>: <%= user.profile.bio %>
+                                        <p class="profile-bio"><strong>Bio</strong>: <%= user.profile.bio %>
                                         </p>
-                                        <div>
-                                            <p><strong>Address</strong>: <%= user.profile.cityState %>
-                                            </p>
-                                            <p><strong>Address</strong>: <%= user.profile.zipcode %>
-                                            </p>
-                                        </div>
+
+                                        <p><strong>Address</strong>: <%= user.profile.cityState %>, <%=
+                                                    user.profile.zipcode %>
+                                        </p>
                                     </div>
-                
+
                                     <div class="profile-btns">
-                                        <form action="/delete-account/<%= user._id %>?_method=DELETE" method="POST" class="col-3">
-                                            <button class="btn btn-primary fa fa-trash" type="submit">Delete Account</button>
+                                        <form action="/delete-account/<%= user._id %>?_method=DELETE" method="POST"
+                                            class="col-3">
+                                            <button class="btn btn-primary fa fa-trash" type="submit">Delete
+                                                Account</button>
                                         </form>
                                         <a class="btn btn-primary editbtn">Edit Profile</a>
                                     </div>
-                                    <div>
+                                    <div class="edit-cont">
                                         <div class="editing hidden">
                                             <h4>Update Your Profile</h4>
                                             <form action="/editprofile/edit/<%= user._id %>?_method=PUT" method="POST">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Volunteer Name"
+                                                <div class="form-cont">
+                                                <div class="col-md-12">
+                                                    <div class="edit-group"  >
+                                                        <label class="edit-label" for="editVolunteerName">Profile Name:</label>
+                                                        <input type="text" class="edit-prof" placeholder="Facility Name"
                                                             name="editVolunteerName" value=" <%= user.profile.profileName %>">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="City, State"
+                                                <div class="col-md-12">
+                                                    <div class="edit-group" >
+                                                        <label class="edit-label" for="editVolunteerCityState">City, State:</label>
+        
+                                                        <input type="text" class="edit-prof" placeholder="City, State"
                                                             name="editVolunteerCityState" value=" <%= user.profile.cityState %>">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Zipcode"
+                                                    <div class="edit-group" >
+                                                    <label  class="edit-label" for="editVolunteerZipcode">Zipcode:</label>
+        
+                                                        <input type="text" class="edit-prof" placeholder="Zipcode"
                                                             name="editVolunteerZipcode" value=" <%= user.profile.zipcode %>">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <textarea name="editVolunteerBio" class="form-control" id="" cols="30" rows="7"
+                                                        <label for="editVolunteerBio" class="box-label">Bio:</label>
+                                                        <textarea name="editVolunteerBio" class="tform edit-prof" id="" cols="30"
+                                                            rows="7"
                                                             placeholder="Add a short bio about your facility"><%= user.profile.bio %></textarea>
                                                     </div>
                                                 </div>
@@ -161,14 +203,27 @@
                                                         <input type="submit" class="btn btn-primary">
                                                     </div>
                                                 </div>
+                                                </div>
                                             </form>
-                
+        
                                         </div>
                                     </div>
-                
+
                                 </div>
-                                <% } %>
-                            <div class="row justify-content-center mt-5">
-                                <a class="btn btn-primary" href="/board">Check out Volunteer Board</a>
                             </div>
-                                <%- include('partials/footer') -%>
+                            <div class="profile-right">
+                                <div class="row justify-content-center mt-5 profile-info rgt-clr">
+                                    <p>Want to Volunteer?</p>
+                                    <a class="btn btn-primary" href="/board">Check out Volunteer Board</a>
+                                </div>
+
+                                <div class="row justify-content-center mt-5 profile-info rgt-clr">
+                                    <p>Check Out Your Upcoming Events</p>
+                                    <a class="btn btn-primary" href="/myevents">My Events</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                    <%- include('partials/footer') -%>

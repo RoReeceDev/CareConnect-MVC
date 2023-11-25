@@ -8,17 +8,20 @@
         <% for(var i=0; i<events.length; i++) {%>
           <li class="event">
             <div>
-              <% if (messages && messages.success) { %>
-                <div class="success-message">
-                  <%= messages.success[0] %>
-                </div>
-              <% } %>
-              
-              <% if (messages && messages.info) { %>
-                <div class="info-message">
-                  <%= messages.info[0] %>
-                </div>
-              <% } %>
+              <% if (locals.messages.success) { %>
+                <% messages.success.forEach( el=> { %>
+                  <div class="alert alert-success">
+                    <%= el %>
+                  </div>
+                  <% }) %>
+                    <% } %>
+                      <% if (locals.messages.info) { %>
+                        <% messages.info.forEach( el=> { %>
+                          <div class="alert alert-info">
+                            <%= el %>
+                          </div>
+                          <% }) %>
+                            <% } %>
               <div>
               <p>
                 <span>Volunteer Event Name:</span><%= events[i].name %>
