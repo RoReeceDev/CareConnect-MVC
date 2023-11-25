@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Event = require("../models/Event");
 const User = require("../models/User");
 
-
+const { ObjectID } = require("mongodb");
 
 module.exports = {
   getMyEvents: async (req, res) => {
@@ -89,4 +89,24 @@ module.exports = {
       res.redirect("/myevents");
     }
   },
+  editEvent: async (req, res) => {
+    try {
+            await Event.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                    $set: {
+                        'name': req.body.editEventName,
+                        'eventDate': req.body.editDateOfEvent,
+                        'startTime': req.body.editStartTime,
+                        'endTime': req.body.editEndTime,
+                        'numNeeded': req.body.editNumNeeded,
+                    },
+                }
+            );
+        console.log("event edited");
+        res.redirect(`/event/${req.params.id}`);
+    } catch (err) {
+        console.log(err);
+    }
+}
 };

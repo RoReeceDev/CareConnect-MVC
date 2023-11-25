@@ -269,6 +269,7 @@ input[type="text"] {
 
 .calendar{
   width: 60%;
+  margin-left: 2%;
 }
 
 .upcoming-events ul{
@@ -345,6 +346,18 @@ justify-content: center;
 
 .btn-center{
   text-align: center;
+}
+
+.vevents-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+
+}
+
+.vevents-header div{
+  margin: 0px 1%;
 }
 
 .events-header{

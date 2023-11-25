@@ -8,11 +8,21 @@
 // 	editDiv.classList.toggle('hidden')
 // })
 
-var editbtn = document.getElementsByClassName("editbtn")
+var profileeditbtn = document.getElementsByClassName("editbtn")
 
-Array.from(editbtn).forEach(function(element) {
+Array.from(profileeditbtn).forEach(function(element) {
 	element.addEventListener('click', function(){
 		const editDiv = document.querySelector(".editing")
+		editDiv.classList.toggle('editon')
+		editDiv.classList.toggle('hidden')
+	})
+})
+
+var eventeditbtn = document.getElementsByClassName("editEventBtn")
+
+Array.from(eventeditbtn).forEach(function(element) {
+	element.addEventListener('click', function(){
+		const editDiv = document.querySelector(".editingevent")
 		editDiv.classList.toggle('editon')
 		editDiv.classList.toggle('hidden')
 	})

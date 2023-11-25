@@ -11,7 +11,7 @@ router.post("/createEvent",  eventsController.createEvent);
 
 router.get('/api/events', calEventsController.getEvents)
 
-// router.put("/likePost/:id", postsController.likePost);
+router.put("/editevent/:id", eventsController.editEvent);
 
 router.delete("/deleteEvent/:id", eventsController.deleteEvent);
 

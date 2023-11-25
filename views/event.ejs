@@ -1,48 +1,112 @@
 <%- include('partials/userheader') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div>
-    <div class="col-6">
-      <h2><%= event.name %></h2>
-    </div>
-    <div class="col-3 mt-5">
-      <span>Date of Event:</span>
-      <p><%= event.eventDate %></p>
-    </div>
-    <div class="col-3 mt-5">
-      <span>Start Time:</span><p><%= event.startTime %></p>
-    </div>
-    <div class="col-3 mt-5">
-      <span>End Time:</span> <p><%= event.endTime%></p>
-    </div>
-    </div>
-    <div>
-      <h4>Registered Volunteers</h4>
-      <div class="col-3 mt-5">
-        <span>Volunteer spots open:</span> <span><%= event.numNeeded %></span>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div>
+        <div class="col-6">
+          <h2>
+            <%= event.name %>
+          </h2>
+        </div>
+        <div class="col-3 mt-5">
+          <span>Date of Event:</span>
+          <p>
+            <%= event.eventDate %>
+          </p>
+        </div>
+        <div class="col-3 mt-5">
+          <span>Start Time:</span>
+          <p>
+            <%= event.startTime %>
+          </p>
+        </div>
+        <div class="col-3 mt-5">
+          <span>End Time:</span>
+          <p>
+            <%= event.endTime%>
+          </p>
+        </div>
+        <div>
+          <%if(event.user==user.id){ %>
+            <form action="/event/deleteEvent/<%= event.id %>?_method=DELETE" method="POST" class="">
+              <button class="btn btn-primary" type="submit">Delete Event</button>
+            </form>
+            <a class="btn btn-primary editEventBtn">Edit Event</a>
+            <%}%>
+        </div>
+        <%if(event.user==user.id){ %>
+          <div class="edit-cont">
+            <div class="editingevent hidden">
+              <h4>Update Your Event</h4>
+              <form action="/event/editEvent/<%= event.id %>?_method=PUT" method="POST">
+                <div class="form-cont">
+                  <div class="col-md-12">
+                    <div class="edit-group">
+                      <label class="edit-label" for="editEventName">Event Name:</label>
+                      <input type="text" class="edit-prof" placeholder="Event Name" name="editEventName"
+                        value=" <%= event.name %>">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="edit-group">
+                      <label class="edit-label" for="editEventName">Date of Event:</label>
+                      <input type="date" class="edit-prof" name="editDateOfEvent"
+                        value=" <%= event.eventDate %>">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="edit-group">
+                      <label class="edit-label" for="editStartTime">Start Time:</label>
+
+                      <input type="time" class="edit-prof" placeholder="Start Time" name="editStartTime"
+                        value=" <%= event.startTime %>">
+                    </div>
+                    <div class="edit-group">
+                      <label class="edit-label" for="editEndTime">End Time:</label>
+
+                      <input type="time" class="edit-prof" placeholder="End Time" name="editEndTime"
+                        value=" <%= event.endTime %>">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="edit-group">
+                      <label for="editNumNeeded" class="edit-label">Volunteers Needed:</label>
+                      <input type="number" class="edit-prof" min="0" max="10" name="editNumNeeded"
+                      value=" <%= event.numNeeded %>">
+                    </div>
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-primary">
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <%}%>
+
       </div>
-    <ul>
-      <% for(var i=0; i<volunteers.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-          <%= volunteers[i].profile.profileName%>
-        </li>
-      <% } %>
-    </ul>
-    </div>
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/board">Check Volunteer Board</a>
-      <%if(event.user == user.id){ %>
-        <form
-          action="/event/deleteEvent/<%= event.id %>?_method=DELETE"
-          method="POST"
-          class=""
-        >
-          <button class="btn btn-primary fa fa-trash" type="submit">Delete Event</button>
-        </form>
-        <%}%>
+      <div>
+        <h4>Registered Volunteers</h4>
+        <div class="col-3 mt-5">
+          <span>Volunteer spots open:</span> <span>
+            <%= event.numNeeded %>
+          </span>
+        </div>
+        <ul>
+          <% for(var i=0; i<volunteers.length; i++) {%>
+            <li class="col-6 justify-content-between mt-5">
+              <%= volunteers[i].profile.profileName%>
+            </li>
+            <% } %>
+        </ul>
+      </div>
+      <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/board">Check Volunteer Board</a>
+      </div>
     </div>
   </div>
-</div>
 
-<%- include('partials/footer') -%>
+  <%- include('partials/footer') -%>
