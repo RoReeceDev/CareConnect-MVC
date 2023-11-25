@@ -24,6 +24,12 @@
   margin: 15px 0%;
 }
 
+/* =======================================================
+*
+*   Sign up page styling 
+*
+* ======================================================= */
+
 
 .role {
   width: 100%;
@@ -75,6 +81,12 @@ input[type=radio] {
   text-align: center;
 }
 
+/* =======================================================
+*
+* 	Board Styling
+*
+* ======================================================= */
+
 
 .home-card {
   border: 2px solid black;
@@ -92,6 +104,12 @@ input[type=radio] {
   row-gap: 0.2em;
   column-gap: 15px;
 }
+
+/* =======================================================
+*
+*   Profile Page Styles 
+*
+* ======================================================= */
 
 .profile-cont {
   width: 100%;
@@ -212,6 +230,128 @@ input[type="text"] {
 
 .edit-label{
   width: 45%;
+}
+
+/* =======================================================
+*
+* 	My Events Page Styling
+*
+* ======================================================= */
+
+.event-cont{
+  display: flex;
+  flex-direction: column;
+}
+
+.event-head{
+  width: 100%;
+}
+
+.event-head h2{
+  text-align: center;
+}
+
+.event-sm-cont{
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
+}
+
+.upcoming-events{
+  width: 40%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.upcoming-events h3{
+  width:90%;
+}
+
+.calendar{
+  width: 60%;
+}
+
+.upcoming-events ul{
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  max-height: 700px;
+  overflow: auto;
+}
+
+.upcoming-events li span{
+  color: white;
+}
+
+.upcoming-events li{
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  background-color: rgb(225, 99, 75);
+  width: 90%;
+  padding: 15px 3%;
+  margin: 15px 0%;
+ 
+}
+
+.view-event-info{
+  margin-top: 5px;
+}
+
+.create-events{
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  background-color: rgb(225, 99, 75);
+  padding: 15px 2%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-events h2{
+  text-align: center;
+
+}
+
+.create-events form{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+justify-content: center;
+}
+
+.create-events input{
+  padding: 0px 2%;
+  margin: 0px 2%;
+  width:50%;
+  text-align: center;
+}
+
+.create-events label{
+  width:42%;
+}
+.create-events label, .create-events h2{
+  color:white;
+}
+
+.create-spacing{
+  padding: 0px 5%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-center{
+  text-align: center;
+}
+
+.events-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
 }
 /* =======================================================
 *

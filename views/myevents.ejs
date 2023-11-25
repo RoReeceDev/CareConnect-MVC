@@ -6,146 +6,158 @@
         <div class="container">
 
             <div class="row mt-5">
-                <div class="col-6">
+                <div class="col-6 events-header">
+                    <div>
                     <h2>Welcome to your events, <%= user.profile.profileName%>!
                     </h2>
-                </div>
-                <div>
+                    </div>
                     <div class="row justify-content-center mt-5">
                         <a class="btn btn-primary" href="/board">Check out Volunteer Board</a>
                     </div>
-                    <div class="mt-5">
+                </div>
+        
+                <div>
+
+                    <div class="mt-5 create-spacing">
+                        <div class="create-events">
                         <h2>Create A Event</h2>
+                      
                         <form action="/event/createEvent" method="POST">
                             <div class="mb-3">
-                                <label for="eventName" class="form-label">Name of Event</label>
-                                <input type="text" class="form-control" id="eventName" name="eventName">
+                                <label for="eventName" class="form-label">Name of Event:</label>
+                                <input type="text" class="edit-prof" id="eventName" name="eventName">
                             </div>
                             <div class="mb-3">
-                                <label for="eventDate" class="form-label">Event Date</label>
-                                <input type="date" min={new Date().toISOString().split('T')[0]} class="form-control"
+                                <label for="eventDate" class="form-label">Event Date:</label>
+                                <input type="date" class="edit-prof"
                                     id="eventDate" name="eventDate">
                             </div>
                             <div class="mb-3">
-                                <label for="sTime" class="form-label">Start Time</label>
-                                <input type="time" class="form-control" id="sTime" name="sTime">
+                                <label for="sTime" class="form-label">Start Time:</label>
+                                <input type="time" class="edit-prof" id="sTime" name="sTime">
                             </div>
                             <div class="mb-3">
-                                <label for="eTime" class="form-label">End Time</label>
-                                <input type="time" class="form-control" id="eTime" name="eTime">
+                                <label for="eTime" class="form-label">End Time:</label>
+                                <input type="time" class="edit-prof" id="eTime" name="eTime">
                             </div>
                             <div class="mb-3">
-                                <label for="numNeeded" class="form-label">Volunteers Needed</label>
-                                <input type="number" min="0" max="10" class="form-control" id="numNeeded"
+                                <label for="numNeeded" class="form-label">Volunteers Needed:</label>
+                                <input type="number" min="0" max="10" class="edit-prof" id="numNeeded"
                                     name="numNeeded">
                             </div>
+                            <div class="view-event-info btn-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
                         </form>
+                        </div>
 
                     </div>
                 </div>
-                <div class="col-6">
-                    <h3>Created Volunteer Events</h3>
-                    <ul class="events">
-                        <% for(var i=0; i<events.length; i++) {%>
-                            <li class="event">
-                                <a href="/event/<%= events[i]._id%>">
+                <div class="event-sm-cont">
+                    <div class="col-6 upcoming-events">
+                        <h3>Created Volunteer Events</h3>
+                        <ul class="events">
+                            <% for(var i=0; i<events.length; i++) {%>
+                                <li class="event">
                                     <div>
                                         <span>Event Name: </span><span class="name">
                                             <%= events[i].name %>
                                         </span>
                                     </div>
                                     <div>
-                                        <div>
-                                            <span>Date of Event: </span><span class="msg">
-                                                <%= events[i].eventDate %>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span>Start Time: </span><span class="thumbs">
-                                                <%= events[i].startTime %>
-                                            </span>
-                                            <span>End Time: </span><span class="thumbs">
-                                                <%= events[i].endTime %>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span># of Volunteers Needed: </span><span class="thumbs">
-                                                <%= events[i].numNeeded %>
-                                            </span>
-                                        </div>
-                                </a>
-                            </li>
-                            <% } %>
+                                        <span>Date of Event: </span><span class="msg">
+                                            <%= events[i].eventDate %>
+                                        </span>
+                                    </div>
 
+                                    <div>
+                                        <span>Starts: </span><span class="thumbs">
+                                            <%= events[i].startTime %>
+                                        </span>
+                                        <span>Ends: </span><span class="thumbs">
+                                            <%= events[i].endTime %>
+                                        </span>
+                                    </div>
 
-
-                    </ul>
-
+                                    <span>Volunteers Needed: </span><span class="thumbs">
+                                        <%= events[i].numNeeded %>
+                                    </span>
+                                    <div class="view-event-info">
+                                        <a class="btn btn-primary" href="/event/<%= events[i]._id%>">View Event
+                                            Info</a>
+                                    </div>
+                                </li>
+                                <% } %>
+                        </ul>
+                    </div>
+                    <div class="calendar">
+                        <div id='calendar'></div>
+                    </div>
                 </div>
-
             </div>
-
-            <div id='calendar'></div>
-
         </div>
         <% } %>
             <%if(user.role.isVolunteer==true){ %>
                 <div class="container">
 
-                    <div class="row mt-5">
-                        <div class="col-6">
+                    <div class="row mt-5 event-cont">
+                        <div class="col-6 event-head">
                             <h2>Welcome to your events, <%= user.profile.profileName %>!
                             </h2>
 
                         </div>
-                        <div>
+                        <div class="events-header">
                             <div class="row justify-content-center mt-5">
                                 <a class="btn btn-primary" href="/board">Check out Volunteer Board</a>
                             </div>
 
                         </div>
-                        <div class="col-6">
-                            <h3>Upcoming Volunteer Events</h3>
-                            <ul class="events">
-                                <% for(var i=0; i<events.length; i++) {%>
-                                    <li class="event">
-                                        <a href="/event/<%= events[i]._id%>">
+                        <div class="event-sm-cont">
+                            <div class="col-6 upcoming-events">
+                                <h3>Upcoming Volunteer Events</h3>
+                                <ul class="events">
+                                    <% for(var i=0; i<events.length; i++) {%>
+                                        <li class="event">
                                             <div>
                                                 <span>Event Name: </span><span class="name">
                                                     <%= events[i].name %>
                                                 </span>
                                             </div>
                                             <div>
-                                                <div>
-                                                    <span>Date of Event: </span><span class="msg">
-                                                        <%= events[i].eventDate %>
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span>Start Time: </span><span class="thumbs">
-                                                        <%= events[i].startTime %>
-                                                    </span>
-                                                    <span>End Time: </span><span class="thumbs">
-                                                        <%= events[i].endTime %>
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span># of Volunteers Needed: </span><span class="thumbs">
-                                                        <%= events[i].numNeeded %>
-                                                    </span>
-                                                </div>
-                                        </a>
-                                    </li>
-                                    <% } %>
+                                                <span>Date of Event: </span><span class="msg">
+                                                    <%= events[i].eventDate %>
+                                                </span>
+                                            </div>
+
+                                            <div>
+                                                <span>Starts: </span><span class="thumbs">
+                                                    <%= events[i].startTime %>
+                                                </span>
+                                                <span>Ends: </span><span class="thumbs">
+                                                    <%= events[i].endTime %>
+                                                </span>
+                                            </div>
+
+                                            <span>Volunteers Needed: </span><span class="thumbs">
+                                                <%= events[i].numNeeded %>
+                                            </span>
+                                            <div class="view-event-info">
+                                                <a class="btn btn-primary" href="/event/<%= events[i]._id%>">View Event
+                                                    Info</a>
+                                            </div>
+                                        </li>
+                                        <% } %>
 
 
 
-                            </ul>
+                                </ul>
 
+                            </div>
+                            <div class="calendar">
+                                <div id='calendar'></div>
+                            </div>
                         </div>
                     </div>
-                    <div id='calendar'></div>
                 </div>
 
                 <% } %>
