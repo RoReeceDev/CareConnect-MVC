@@ -6,9 +6,10 @@ const Event = require("../models/Event");
 module.exports = {
   getNH: async (req, res) => {
     try {
+      const users = await User.find({_id:req.params.id })
       const events = await Event.find({ user: req.params.id });
       res.render("nursinghome.ejs", { events: events, user: req.user, messages: req.flash('success'),
-      messages: req.flash('info'), pageName: 'nursinghome'});
+      messages: req.flash('info'), pageName: 'nursinghome', users: users});
     } catch (err) {
       console.log(err);
     }

@@ -1,45 +1,102 @@
 <%- include('partials/userheader') -%>
 
   <main class="container">
-    <div></div>
+    <div class="nh-page">
+      <div class="nh-holder">
+        <% for(var i=0; i<users.length; i++) {%>
+          <%# need to make this more bulletproof, if user.role undefine, then continue? %>
+            <% if (users[i].role.isNursingHome===true) { %>
+              <div class="home-card">
+                <div>
+                  <img src="/imgs/nursinghome.jpg">
+                </div>
+                <div class="home-card-info">
+                  <p>
+                    <span><strong>Home</strong>:</span>
+                    <%= users[i].profile.profileName%>
+                  </p>
+                  <p>
+                    <span><strong>Contact Name</strong>:</span>
+                    <%= users[i].profile.contactName%>
+                  </p>
+                  <p>
+                    <span><strong>Phone</strong>:</span>
+                    <%= users[i].profile.contactNumber%>
+                  </p>
+                  <p>
+                    <span><strong>Located</strong>:</span>
+                    <%= users[i].profile.cityState%>,
+                      <%= users[i].profile.zipcode%>
+                  </p>
+                  <p>
+                    <span><strong>Bio</strong>:</span>
+                    <%= users[i].profile.bio%>
+                  </p>
 
-    <div class="">
-      <ul class="events">
-        <% for(var i=0; i<events.length; i++) {%>
-          <li class="event">
-            <div>
-              <div>
-              <p>
-                <span>Volunteer Event Name:</span><%= events[i].name %>
-              </p>
-              <p>
-                <span>Date of Event:</span><%= events[i].eventDate %>
-              </p>
-              <p>
-                <span>Starts:</span><%= events[i].startTime %>
-                <span>Ends:</span><%= events[i].endTime %>
-              </p>
-              <p>
-                <span>Volunteers Needed:</span><%= events[i].numNeeded %>
-              </p>
+                </div>
+
               </div>
-              <% if ((events[i].numNeeded> 0) && (user.role.isNursingHome===false)) { %>
-                <form action="/nh/joinEvent/<%= events[i]._id %>?_method=PUT" method="POST">
-                  <button>Sign up for Event</button>
-                </form>
+
+              <% } %>
                 <% } %>
-                  <% if (user.role.isNursingHome===false) { %>
-                    <form action="/nh/unjoinEvent/<%= events[i]._id %>?_method=PUT" method="POST">
-                      <button>Cancel sign up</button>
-                    </form>
-                    <% } %>
-            </div>
-          </li>
-          <% } %>
+                  <div class="rtnbtn">
+                    <a class="btn btn-primary" href="/board">Return to Board</a>
+                  </div>
+      </div>
+      <div class="nh-event-sm-cont">
+        <div class="nh-events">
+          <h2>Open Events</h2>
+          <ul class="nh-events-cont">
+            <% for(var i=0; i<events.length; i++) {%>
+              <li class="nh-event">
+                <div>
+                  <div>
+                    <p>
+                      <span><strong>Event Name</strong>:</span>
+                      <%= events[i].name %>
+                    </p>
+                    <p>
+                      <span><strong>Date of Event</strong>:</span>
+                      <%= events[i].eventDate %>
+                    </p>
+                    <p>
+                      <span><strong>Starts</strong>:</span>
+                      <%= events[i].startTime %>
+                        <span><strong>Ends</strong>:</span>
+                        <%= events[i].endTime %>
+                    </p>
+                    <p>
+                      <span><strong>Volunteers Needed</strong>:</span>
+                      <%= events[i].numNeeded %>
+                    </p>
+                  </div>
+                  <div class="nh-eventbtn">
+                    <% if ((events[i].numNeeded > 0) && (user.role.isNursingHome===false)) { %>
+                      <form action="/nh/joinEvent/<%= events[i]._id %>?_method=PUT" method="POST">
+                        <button class="btn btn-primary">Sign up for Event</button>
+                      </form>
+                      <% } else { %>
+                        <% if(events[i].numNeeded === 0){ %>
+                        <span><strong>Event Full</strong></span>
+                        <% } %>
+
+                        <% } %>
+
+                          <% if (user.role.isNursingHome===false) { %>
+                            <form action="/nh/unjoinEvent/<%= events[i]._id %>?_method=PUT" method="POST">
+                              <button class="btn btn-primary">Cancel sign up</button>
+                            </form>
+                            <% } %>
+                  </div>
+                </div>
+              </li>
+              <% } %>
 
 
 
-      </ul>
+          </ul>
+        </div>
+      </div>
     </div>
 
 

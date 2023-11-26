@@ -10,35 +10,32 @@
             <%# need to make this more bulletproof, if user.role undefine, then continue? %>
               <% if (users[i].role.isNursingHome===true) { %>
                 <div class="home-card">
-                <a href="/nh/<%=users[i]._id %>">
                   <div>
                     <img src="/imgs/nursinghome.jpg">
                   </div>
-                  <div >
+                  <div class="home-card-info">
                     <p>
-                      <span>Nursing Home:</span>
+                      <span><strong>Home</strong>:</span>
                       <%= users[i].profile.profileName%>
                     </p>
                     <p>
-                      <span>Contact Name:</span>
+                      <span><strong>Contact Name</strong>:</span>
                       <%= users[i].profile.contactName%>
                     </p>
                     <p>
-                      <span>Nursing Home Phone:</span>
+                      <span><strong>Phone</strong>:</span>
                       <%= users[i].profile.contactNumber%>
                     </p>
                     <p>
-                      <span></span>
-                      <%= users[i].profile.bio%>
-                    </p>
-                    <p>
-                      <span>Located:</span>
-                      <%= users[i].profile.cityState%>
+                      <span><strong>Located</strong>:</span>
+                      <%= users[i].profile.cityState%>,
                         <%= users[i].profile.zipcode%>
                     </p>
-  
+
                   </div>
-                </a>
+                  <div class="nh-btn"> <a class="btn btn-primary" href="/nh/<%=users[i]._id %>">See Open Events</a>
+                  </div>
+
                 </div>
 
                 <% } %>

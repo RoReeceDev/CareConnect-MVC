@@ -6,7 +6,6 @@ module.exports = {
     //pass in users 
     getCreateProfile: async (req, res) => {
         try {
-            console.log(req.user)
             const users = await User.find({ user: req.user.id });
             res.render("createprofile.ejs", { users: users, user: req.user, pageName: 'createprofile'});
         } catch (err) {
@@ -16,8 +15,6 @@ module.exports = {
 
     updateProfile: async (req, res) => {
         try {
-            console.log(req.user)
-            //work on this later maybe conditional
             // const result = await cloudinary.uploader.upload(req.file.path);
             if (req.user.role.isVolunteer === true) {
                 await User.findOneAndUpdate(
@@ -61,8 +58,6 @@ module.exports = {
     },
     editProfile: async (req, res) => {
         try {
-            console.log(req.user)
-            //work on this later maybe conditional
             // const result = await cloudinary.uploader.upload(req.file.path);
             if (req.user.role.isVolunteer === true) {
                 await User.findOneAndUpdate(

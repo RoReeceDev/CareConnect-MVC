@@ -4,94 +4,110 @@
         <div id="fh5co-portfolio">
             <div class="container">
                 <div class="row animate-box">
-                    <div class="col-sm-7 col-md-offset-2 text-center fh5co-heading">
+                    <div class="col-sm-7 col-md-offset-2 text-center cp-head">
                         <h2>Profile</h2>
                         <p>Set up your profile!</p>
                     </div>
                 </div>
-                <div class="col-sm-9 col-sm-push-1 animate-box">
-                    <div class="row">
-
+                <div class="col-sm-9 col-sm-push-1 animate-box cp-cont">
+                    <div class="row vnh-create">
                         <% if (user.role.isVolunteer===true) { %>
-                        <form action="/editprofile/create/<%= user.id %>?_method=PUT"  method="POST">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name" name="volunteerName">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="City, State"
-                                        name="volunteerCityState">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Zipcode"
-                                        name="volunteerZipcode">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="number" min="16" max="50" class="form-control" placeholder="Age"
-                                        name="volunteerAge">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea name="volunteerBio" class="form-control" id="" cols="30" rows="7"
-                                        placeholder="Add a short bio about yourself"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary">
-                                </div>
-                            </div>
-                        </form>
-                        <% } %>
-                        <% if (user.role.isNursingHome===true){ %>
-                        <form action="/editprofile/create/<%= user.id %>?_method=PUT"  method="POST">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Facility Name" name="facilityName">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Contact Name" name="contactName">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Facility Number" name="facilityPhone">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Address"
-                                        name="facilityAddress">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="City, State"
-                                        name="facilityCityState">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Zipcode"
-                                        name="facilityZipcode">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea name="facilityBio" class="form-control" id="" cols="30" rows="7"
-                                        placeholder="Add a short bio about your facility"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary">
-                                </div>
-                            </div>
-                        </form>
-                        <% } %>
+                        
+                                <form action="/editprofile/create/<%= user.id %>?_method=PUT" method="POST">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="edit-label" for="volunteerName">Profile Name:</label>
+                                            <input type="text" class="edit-prof" placeholder="Name"
+                                                name="volunteerName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="edit-label" for="volunteerCityState">City, State:</label>
+                                            <input type="text" class="edit-prof" placeholder="City, State"
+                                                name="volunteerCityState">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="edit-label" for="volunteerZipcode">Zipcode:</label>
+                                            <input type="text" class="edit-prof" placeholder="Zipcode"
+                                                name="volunteerZipcode">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="edit-label" for="volunteerAge">Age:</label>
+                                            <input type="number" min="16" max="50" class="edit-prof" placeholder="Age"
+                                                name="volunteerAge">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="volunteerBio" class="box-label">Bio:</label>
+                                            <textarea name="volunteerBio" class="tform edit-prof" id="" cols="30" rows="7"
+                                                placeholder="Add a short bio about yourself"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </form>
+                                <% } %>
+                            <% if (user.role.isNursingHome===true){ %>
+                                <form action="/editprofile/create/<%= user.id %>?_method=PUT" method="POST">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="edit-label" for="facilityName">Facility Name:</label>
+                                            <input type="text" class="edit-prof" placeholder="Facility Name"
+                                                name="facilityName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="edit-label" for="contactName">Contact Name:</label>
+                                            <input type="text" class="edit-prof" placeholder="Contact Name"
+                                                name="contactName">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="edit-label" for="facilityPhone">Facility Phone:</label>
+                                            <input type="text" class="edit-prof" placeholder="Facility Number"
+                                                name="facilityPhone">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="edit-label" for="facilityAddress">Address:</label>
+                                            <input type="text" class="edit-prof" placeholder="Address"
+                                                name="facilityAddress">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="edit-label" for="facilityCityState">City, State:</label>
+                                            <input type="text" class="edit-prof" placeholder="City, State"
+                                                name="facilityCityState">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="edit-label" for="facilityZipcode">Zipcode:</label>
+                                            <input type="text" class="edit-prof" placeholder="Zipcode"
+                                                name="facilityZipcode">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="volunteerBio" class="box-label">Bio:</label>
+                                            <textarea name="facilityBio" class="tform edit-prof" id="" cols="30" rows="7"
+                                                placeholder="Add a short bio about your facility"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </form>
+                                <% } %>
                     </div>
                 </div>
             </div>

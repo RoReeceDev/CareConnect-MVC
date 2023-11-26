@@ -1,7 +1,8 @@
 <%- include('partials/userheader') -%>
   <div class="container">
-    <div class="row justify-content-center mt-5">
-      <div>
+    <div class="row justify-content-center mt-5 editevent-cont">
+      <div class="edit-event">
+        <div class="event-info">
         <div class="col-6">
           <h2>
             <%= event.name %>
@@ -9,23 +10,24 @@
         </div>
         <div class="col-3 mt-5">
           <span>Date of Event:</span>
-          <p>
+          <span>
             <%= event.eventDate %>
-          </p>
+          </span>
         </div>
         <div class="col-3 mt-5">
           <span>Start Time:</span>
-          <p>
+          <span>
             <%= event.startTime %>
-          </p>
+          </span>
         </div>
         <div class="col-3 mt-5">
           <span>End Time:</span>
-          <p>
+          <span>
             <%= event.endTime%>
-          </p>
+          </span>
         </div>
-        <div>
+        </div>
+        <div class="del-edit-event">
           <%if(event.user==user.id){ %>
             <form action="/event/deleteEvent/<%= event.id %>?_method=DELETE" method="POST" class="">
               <button class="btn btn-primary" type="submit">Delete Event</button>
@@ -49,7 +51,7 @@
                   <div class="col-md-12">
                     <div class="edit-group">
                       <label class="edit-label" for="editEventName">Date of Event:</label>
-                      <input type="date" class="edit-prof" name="editDateOfEvent"
+                      <input type="date" class="edit-prof" id="eventDate"  name="editDateOfEvent"
                         value=" <%= event.eventDate %>">
                     </div>
                   </div>
@@ -88,6 +90,7 @@
 
       </div>
       <div>
+        <div class="volunteers-signed">
         <h4>Registered Volunteers</h4>
         <div class="col-3 mt-5">
           <span>Volunteer spots open:</span> <span>
@@ -101,12 +104,16 @@
             </li>
             <% } %>
         </ul>
-      </div>
-      <div class="col-6 mt-5">
-        <a class="btn btn-primary" href="/profile">Return to Profile</a>
-        <a class="btn btn-primary" href="/board">Check Volunteer Board</a>
+        </div>
+        <div class="col-6 mt-5">
+          <a class="btn btn-primary" href="/profile">Return to Profile</a>
+          <a class="btn btn-primary" href="/board">Check Volunteer Board</a>
+        </div>
       </div>
     </div>
   </div>
+
+
+  <script src="/js/date.js"></script>
 
   <%- include('partials/footer') -%>

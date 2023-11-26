@@ -95,9 +95,6 @@ exports.deleteAccount = async (req, res) => {
       let events = []
       // Fetch events the user has signed up for
       events = await Event.find({ volunteers: req.user.id });
-      console.log(req.user.id)
-
-      console.log(events)
 
       // Update numNeeded for each event
       for (const event of events) {

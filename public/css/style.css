@@ -81,6 +81,8 @@ input[type=radio] {
   text-align: center;
 }
 
+
+
 /* =======================================================
 *
 * 	Board Styling
@@ -89,13 +91,31 @@ input[type=radio] {
 
 
 .home-card {
-  border: 2px solid black;
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  background-color: rgb(225, 99, 75);
+  padding: 15px 10%;
   margin: 15px 0%;
   height: auto;
 }
 
+.home-card-info p{
+  margin-bottom: 5px;
+}
+
+.home-card-info{
+  color: white;
+  margin: 15px 0%;
+}
+
+.nh-btn{
+  display: flex;
+  justify-content: center;
+}
+
 .home-card img {
   width: 100%;
+  border-radius: 15px;
 }
 
 .card-holder {
@@ -191,12 +211,10 @@ input[type=radio] {
   font-size: 1.5rem;
   font-weight: 300;
   border-radius: 15px;
+  height: 35px;
+  width: 52%
 }
 
-input[type="text"] {
-  height: 35px !important;
-  width:52%;
-}
 
 .tform{
   height: auto;
@@ -308,6 +326,8 @@ input[type="text"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 14px 30px -15px rgba(0, 0, 0, 0.75);
+
 }
 
 .create-events h2{
@@ -366,6 +386,176 @@ justify-content: center;
   align-items: center;
   margin-bottom: 15px;
 }
+
+/* =======================================================
+*
+* 	Event Page Style 
+*
+* ======================================================= */
+
+.editevent-cont{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 2%;
+
+}
+
+.edit-event{
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  background-color: rgb(225, 99, 75);
+  padding: 15px 2%;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 14px 30px -15px rgba(0, 0, 0, 0.75);
+
+}
+
+.del-edit-event{
+  display: flex;
+  margin-top: 15px;
+}
+
+.event-info{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 54%;
+}
+
+.event-info h2{
+  color: white;
+}
+
+.edit-cont{
+  width: 85%;
+}
+
+.edit-cont h4{
+  text-align: center;
+}
+
+.volunteers-signed{
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  background-color: rgb(225, 99, 75);
+  padding: 15px 10%;
+  color:white;
+  margin-bottom: 15px;
+  box-shadow: 0px 14px 30px -15px rgba(0, 0, 0, 0.75);
+
+
+}
+
+.volunteers-signed h4{
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* =======================================================
+*
+* 	NH Event Page Styling
+*
+* ======================================================= */
+
+.nh-holder{
+  width: 50%;
+}
+
+.nh-event{
+  color:white;
+}
+
+.nh-event p{
+  margin-bottom: 5px;
+}
+
+.nh-events{
+  width: 90%;
+  text-align: center;
+ margin-top: 15px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+
+} 
+
+.nh-event-sm-cont{
+width: 50%;
+margin-top: 15px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.rtnbtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nh-eventbtn{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top:10px;
+}
+
+.nh-page{
+  display: flex;
+}
+
+.nh-events-cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.nh-events ul{
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  max-height: 700px;
+  overflow: auto;
+}
+
+.nh-events li{
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  background-color: rgb(225, 99, 75);
+  width: 90%;
+  padding: 15px 3%;
+  margin: 15px 0%;
+}
+
+/* =======================================================
+*
+* 	NH Event Page Styling
+*
+* ======================================================= */
+
+.vnh-create{
+  border: 1px solid rgb(177, 162, 60);
+  border-radius: 15px;
+  background-color: rgb(225, 99, 75);
+  width: 90%;
+  padding: 20px 3%;
+}
+
+.cp-head{
+  margin-bottom: 2em;
+}
+.cp-cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* =======================================================
 *
 * 	Template Style 
@@ -381,7 +571,7 @@ body {
 }
 
 .spacing {
-  margin-top: 3%;
+  margin-top: 8%;
 }
 
 #page {
@@ -1575,9 +1765,6 @@ figure {
   border: 2px solid rgba(0, 0, 0, 0.8);
 }
 
-input[type="text"] {
-  height: 50px;
-}
 
 .form-group {
   margin-bottom: 30px;

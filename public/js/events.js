@@ -45,3 +45,5 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add an event listener to update the calendar when a user is deleted
     document.addEventListener('userDeleted', fetchAndRenderEvents);
 });
+
+ 
