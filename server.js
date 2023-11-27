@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const cookieParser = require('cookie-parser');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
@@ -42,12 +43,16 @@ app.use(logger("dev"));
 //Use forms for put / delete
 app.use(methodOverride("_method"));
 
+app.use(cookieParser('secret'));
+
+
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
+    cookie: { maxAge: 60000 },
     secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
@@ -58,6 +63,13 @@ app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
+
+app.use(function(req, res, next){
+  // if there's a flash message in the session request, make it available in the response, then delete it
+  res.locals.sessionFlash = req.session.sessionFlash;
+  delete req.session.sessionFlash;
+  next();
+});
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);

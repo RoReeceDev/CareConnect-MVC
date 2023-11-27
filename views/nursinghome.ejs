@@ -46,6 +46,12 @@
       <div class="nh-event-sm-cont">
         <div class="nh-events">
           <h2>Open Events</h2>
+          <div class="messages">
+           <% if(sessionFlash && sessionFlash.message) { %>
+            <%= sessionFlash.message%>
+           <% } %>
+
+          </div>
           <ul class="nh-events-cont">
             <% for(var i=0; i<events.length; i++) {%>
               <li class="nh-event">
