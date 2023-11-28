@@ -31,7 +31,7 @@ module.exports = {
     try {
 
       const userEvents = await Event.find({
-        user: req.user.id,
+        user: req.user._id,
         eventDate: req.body.eventDate,
         $or: [
           {
