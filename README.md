@@ -2,7 +2,7 @@
 
 Welcome to CareConnect, a volunteer matching site designed to combat isolation and depression in nursing homes. CareConnect aims to fulfill the desire for human connection and embraces the power of storytelling that seniors cherish.
 
-https://careconnect.up.railway.app/
+Link to Live Site: https://careconnect.up.railway.app/
 
 ![CareConnect Gif](public/imgs/careconnect.gif)
 

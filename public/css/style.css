@@ -520,7 +520,7 @@ align-items: flex-start;
   list-style-type: none;
   padding: 0;
   text-align: center;
-  max-height: 700px;
+  max-height: 1000px;
   overflow: auto;
 }
 

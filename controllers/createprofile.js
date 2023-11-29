@@ -15,8 +15,9 @@ module.exports = {
 
     updateProfile: async (req, res) => {
         try {
+        
             // const result = await cloudinary.uploader.upload(req.file.path);
-            if (req.user.role.isVolunteer === true) {
+            if (req.user.role.isVolunteer == true) {
                 await User.findOneAndUpdate(
                     { _id: req.params.id },
                     {
@@ -32,7 +33,7 @@ module.exports = {
                     }
                 );
             }
-            if (req.user.role.isNursingHome === true) {
+            if (req.user.role.isNursingHome == true) {
                 await User.findOneAndUpdate(
                     { _id: req.params.id },
                     {

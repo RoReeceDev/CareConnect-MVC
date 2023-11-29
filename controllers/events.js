@@ -29,7 +29,7 @@ module.exports = {
   },
   createEvent: async (req, res) => {
     try {
-
+      
       const userEvents = await Event.find({
         user: req.user._id,
         eventDate: req.body.eventDate,
