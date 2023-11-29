@@ -556,6 +556,23 @@ align-items: flex-start;
   align-items: center;
 }
 
+.messages-bad{
+  margin: 10px 0%;
+  color: red;
+  background-color: pink;
+  border-radius: 15px;
+  padding: 0% 1%;
+}
+
+.messages-good{
+  margin: 10px 0%;
+  color: green;
+  background-color: lightgreen;
+  border-radius: 15px;
+  padding: 0% 1%;
+  font-size: 15px;
+}
+
 /* =======================================================
 *
 * 	Template Style 

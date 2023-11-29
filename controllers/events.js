@@ -57,7 +57,13 @@ module.exports = {
   
       if (userEvents.length > 0) {
         console.log("Cannot create event. Conflicting events exist.");
-        return  res.redirect("/myevents");
+        msg = 'Cannot create event. Conflicting events exist.'
+
+        req.session.sessionFlash = {
+          type: 'msg',
+          message: msg
+      }
+        return  req.session.save(() => res.redirect("/myevents"));
 
       }
 

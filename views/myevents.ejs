@@ -26,7 +26,12 @@
                     <div class="mt-5 create-spacing">
                         <div class="create-events">
                             <h2>Create A Event</h2>
+                            <div class="messages-bad">
+                                <% if(sessionFlash && sessionFlash.message) { %>
+                                    <%= sessionFlash.message%>
+                                        <% } %>
 
+                            </div>
                             <form action="/event/createEvent" method="POST">
                                 <div class="mb-3">
                                     <label for="eventName" class="form-label">Name of Event:</label>
