@@ -3,7 +3,7 @@ const validator = require("validator");
 const User = require("../models/User");
 const Event = require("../models/Event");
 
-//CRUD- get login page
+
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -15,7 +15,6 @@ exports.getLogin = (req, res) => {
 };
 
 
-//User login
 
 
 exports.postLogin = (req, res, next) => {
@@ -52,7 +51,7 @@ exports.postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-//CRUD- get logout
+
 
 exports.logout = (req, res) => {
   req.logout(() => {
@@ -66,7 +65,6 @@ exports.logout = (req, res) => {
   });
 };
 
-//CRUD- get sign up page 
 
 exports.getSignup = (req, res) => {
   if (req.user) {
@@ -77,7 +75,7 @@ exports.getSignup = (req, res) => {
   });
 };
 
-//CRUD-Delete Account
+
 
 exports.deleteAccount = async (req, res) => {
   try {

@@ -10,7 +10,6 @@ module.exports = {
       }else{
        events = await Event.find({ volunteers: req.user.id }).sort({eventDate: "ascending"});
       }
-        //   const events = await Event.find().sort({ eventDate: "ascending" });
     
           // Send events as JSON
           res.json(events);

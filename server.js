@@ -49,7 +49,7 @@ app.use(cookieParser('secret'));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
     secret: "keyboard cat",
     resave: true,
     saveUninitialized: true,

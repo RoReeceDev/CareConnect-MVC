@@ -5,8 +5,8 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Main Routes
 router.get("/create", ensureAuth, manageProfileController.getCreateProfile);
-router.put("/create/:id", manageProfileController.updateProfile);
-router.put("/edit/:id", manageProfileController.editProfile);
+router.put("/create/:id", ensureAuth, manageProfileController.updateProfile);
+router.put("/edit/:id", ensureAuth, manageProfileController.editProfile);
 
 
 

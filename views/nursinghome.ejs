@@ -4,7 +4,6 @@
     <div class="nh-page">
       <div class="nh-holder">
         <% for(var i=0; i<users.length; i++) {%>
-          <%# need to make this more bulletproof, if user.role undefine, then continue? %>
             <% if (users[i].role.isNursingHome===true) { %>
               <div class="home-card">
                 <div>

@@ -8,8 +8,8 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 router.get("/:id", ensureAuth, NHController.getNH);
 
 
-router.put("/joinEvent/:id", NHController.joinEvent);
-router.put("/unjoinEvent/:id", NHController.unjoinEvent);
+router.put("/joinEvent/:id", ensureAuth, NHController.joinEvent);
+router.put("/unjoinEvent/:id", ensureAuth, NHController.unjoinEvent);
 
 // router.delete("/deleteEvent/:id", eventsController.deleteEvent);
 
